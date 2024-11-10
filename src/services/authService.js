@@ -19,6 +19,12 @@ export const userLogout = async (user, onLogout) => {
     await sendMail(user.email, "Logout Notification", "User has logged out");
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-    await axios.get(process.env.REACT_APP_BACKEND_URL+'/api/auth/logout');
+    try {
+      await axios.get(process.env.REACT_APP_BACKEND_URL+'/api/auth/logout', {
+        withCredentials: true,
+      });
+    } catch (err) {
+      console.error('Error fetching user data:', err);
+    }
     onLogout();
 };
