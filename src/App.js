@@ -70,7 +70,7 @@ function App() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = REACT_APP_BACKEND_URL+'/api/auth/google';
+    window.location.href = process.env.REACT_APP_BACKEND_URL+'/api/auth/google';
   };
 
   return (
