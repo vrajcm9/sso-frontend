@@ -4,7 +4,7 @@ import { sendMail } from './notificationService';
 export const fetchUser = async () => {
     const userId = localStorage.getItem('userId');
     try {
-      const res = await axios.get('http://localhost:4000/api/user', {
+      const res = await axios.get(REACT_APP_BACKEND_URL+'/api/user', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         withCredentials: true,
         params: { userId },
@@ -19,6 +19,6 @@ export const userLogout = async (user, onLogout) => {
     await sendMail(user.email, "Logout Notification", "User has logged out");
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-    await axios.get('http://localhost:4000/api/auth/logout');
+    await axios.get(REACT_APP_BACKEND_URL+'/api/auth/logout');
     onLogout();
 };

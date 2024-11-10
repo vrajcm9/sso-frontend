@@ -4,7 +4,7 @@ import { fetchUser } from './authService';
 
 export const createRequest = async (user, request) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/requests', request, {
+      const response = await axios.post(REACT_APP_BACKEND_URL+'/api/requests', request, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       console.log(response);
@@ -18,7 +18,7 @@ export const createRequest = async (user, request) => {
   export const fetchRequests = async () => {
     try {
       const userId = localStorage.getItem('userId');
-      const res = await axios.get('http://localhost:4000/api/requests/userRequests', {
+      const res = await axios.get(REACT_APP_BACKEND_URL+'/api/requests/userRequests', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         params: { userId },
       });
@@ -30,7 +30,7 @@ export const createRequest = async (user, request) => {
 
   export const fetchApprovalRequests = async (email) => {
     try {
-      const res = await axios.get('http://localhost:4000/api/requests/approvalRequests', {
+      const res = await axios.get(REACT_APP_BACKEND_URL+'/api/requests/approvalRequests', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         params: { email },
       });
@@ -55,7 +55,7 @@ export const createRequest = async (user, request) => {
 
   export const updateRequestStatus = async (requestId, status, userMail) => {
     try {
-      const response = await axios.patch(`http://localhost:4000/api/requests/approvalRequests`, { status: status }, {
+      const response = await axios.patch(`${REACT_APP_BACKEND_URL}/api/requests/approvalRequests`, { status: status }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         params: { requestId, status: status },
       });
